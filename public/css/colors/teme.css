@@ -1,0 +1,22 @@
+:root {
+    --navbar: #1C1C1C;
+    --breadcrumb: #504f4fbd;
+    --body-background: #a5a5a5;
+    --box-text: #464646d1;
+    --bg-card:#e5e5e5;
+    --border-card:#3e3e3e;
+    --quadro-bg-1:  #565656;
+    --quadro-bg-2:  #8b8b8b6b;
+    --quadro-footer-shadow: rgb(0 0 0 / 81%);
+    --bg-footer-h: #DADDD8;
+    --bg-footer-f: #1C1C1C;
+    --icon-hover1: #66db518a;
+    --icon-hover2: #0e8765b4;
+    --icon-hover-shadow: rgba(0, 157, 55, 0.368);
+    --text-link: #082f87;
+    --text-link-hover: #affffc;
+    --text-contato: #19243c;
+    --text-title: rgb(8, 8, 8);
+    --text: rgb(60 60 60);
+    --title-logo: #ffffff;
+    }

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="pt-BR">
+<head>
+    <meta http-equiv="content-language" content="pt-br">
+    <meta name="author" content="KauanH">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Divulgação de produtos, venha ja conferir">
+    <meta name="keywords" content="cosmeticos, beleza, vida, cuidados, pele, produtos,"/>
+    <meta name="robots" content="all" />
+    <link rel=”canonical” href="<%=url%>/login"/>
+    <title><%=titulo%></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/colors/teme.css"/>
+    <link rel="stylesheet" type="text/css" href="css/header_footer/header_footer.css"/>
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+</head>
+<body>
+<header class="sticky-top">
+  <!--Menu antes do colappso-->
+      <div class="pos-f-t">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-menu">
+        <div class="container-fluid">
+          <a id="logoSite" class="navbar-brand" style="font-size: calc(31px + (48 - 31) * ((100vw - 400px) / (2600 - 400)));" href="<%=url%>/"><%= marca%></a>
+          <div class="navbar-toggler" type="button" aria-expanded="false">
+            <a class="text-white" href="<%=url%>/">Inicio</a>
+          </div>
+          <div class="collapse navbar-collapse justify-content-space-between" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="<%=url%>/">Inicio</a>
+            </li>
+            <li>
+                <a class="nav-link" aria-current="page" href="#">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="<%=url%>/login">Login</a>
+          </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      </div>
+</header>
+<main>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb color-cinza">
+      <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+      <li class="breadcrumb-item active" aria-current="page">Login</li>
+    </ol>
+  </nav>
+    <section class="get-in-touch">
+        <h1 class="title">Get in touch</h1>
+        <form class="contact-form row" method="POST" action="/painel" enctype="application/x-www-form-urlencoded">
+           <div class="form-field col-lg-6 ">
+              <input name="email" id="inputEmail" class="input-text js-input" type="email" required>
+              <label class="label" for="inputEmail">E-mail</label>
+           </div>
+           <div class="form-field col-lg-6">
+              <input name="senha" autocomplete="on" id="inputSenha" class="input-text js-input" type="password" required>
+              <label class="label" for="inputSenha">Senha</label>
+           </div>
+           <div class="form-field col-lg-12" style="text-align: center;">
+              <button class="submit-btn" type="submit">Enviar</button>
+           </div>
+        </form>
+     </section>
+</main>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<%- include('include/footer.ejs')%>
