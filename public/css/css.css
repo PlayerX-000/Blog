@@ -128,7 +128,7 @@ a,p {
 
 p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: calc(7px + (34 - 7) * ((100vw - 400px) / (2600 - 400))) !important;
+    font-size: calc(10px + (37 - 10) * ((100vw - 400px) / (2600 - 400))) !important;
     font-style: normal;
     font-weight: 300;
     font-variant: normal;
@@ -166,7 +166,7 @@ p {
         background-color: var(--bg-card);
         margin: 5%;
         height: 35%;
-        max-height: 50%;
+        max-height: -webkit-fill-available;
         border-radius: 10px;
         box-shadow: 3px 3px 12px 3px var(--border-card);    
     }   
@@ -197,6 +197,7 @@ p {
     }      
 
     .containerr {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -212,13 +213,13 @@ p {
 
 
 .opcNav.active {
-    color: #273a34 !important;
-    background-color: #47b700d1 !important;
-    border-color: #128d00 #128d00 #128d00 !important;
+    color: #ffffff !important;
+    background-color: #ffffff17 !important;
+    border-color: #ffffff #000000b3 #000000 !important;
 }
 
 .opcNav:hover{
-    border-color: rgb(172, 244, 157) rgb(51, 205, 20) rgb(172, 244, 157) !important;
+    border-color: #ffffff #000000b3 #ffffff !important;
 }
 
   
@@ -233,6 +234,7 @@ p {
         margin-bottom: 40px;
     }
 }
+
 .deneb_footer .widget_wrapper .widget .widget_title {
     margin-bottom: 30px;
 }
@@ -648,7 +650,6 @@ div#getCtt {
 }
 
 .dashboard-app {
-    z-index: 0;
     position: absolute;
     width: 100%;
     display: -webkit-box;
@@ -679,14 +680,9 @@ div#getCtt {
     display: none;
 }
 
-
-
-.dashboard-nav a {
-    color: #515151;
-}
-
 .dashboard-nav a:hover {
     text-decoration: none;
+    cursor: pointer;
 }
 
 
@@ -1043,4 +1039,132 @@ a:focus {
     align-content: center;
     justify-content: center;
     align-items: center;
+}
+
+@media (min-width: 992px){
+.col-lg-4 {
+    max-width: 25.333333% !important;
+}
+}
+
+.row {
+    justify-content: space-around !important;
+}
+
+
+
+.content {
+    padding: 0;
+    background-color: #202020;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    text-align: center;
+    align-items: center;;
+}
+  
+div#filtraPosts.card-m {
+    margin-top: 5%;
+    min-height: 100%;
+    background-color: #727272;
+}
+
+
+  h2 {
+    font-size: 20px; }
+  
+  .custom-dropdown .btn:active, .custom-dropdown .btn:focus {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline: none; }
+  
+  .custom-dropdown .btn.btn-custom {
+    border: 1px solid #efefef; }
+  
+  .custom-dropdown .dropdown-link {
+    color: #b2baf7;
+    font-size: 14px;
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 4px;
+    border: 1px solid transparent; }
+    .custom-dropdown .dropdown-link:hover {
+      border: 1px solid #d1d1d1;
+      -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.05); }
+  
+  .custom-dropdown .dropdown-item {
+    font-size: 14px;
+    color: #c7c7c7; }
+    .custom-dropdown .dropdown-item:hover {
+      background: #00000093;
+      color: rgb(141, 140, 140); }
+  
+  .custom-dropdown.show .dropdown-link {
+    border: 1px solid #747474 !important;
+    background: #484848;
+    -webkit-box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.2); }
+  
+.cont {
+    width: 100%;
+}
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    margin-top: 0px;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    text-align: left;
+    list-style: none;
+    background-color: rgb(35 0 145 / 85%) !important;
+    background-clip: padding-box;
+    border: black;
+    border-width: thin;
+    border-style: groove;
+    border-radius: 0.25rem;
+    -webkit-box-shadow: 0 15px 30px 0 rgb(0 0 0 / 41%);
+    box-shadow: 0 15px 30px 0 rgb(0 0 0 / 41%);
+    -webkit-transition: margin-top .3s ease, opacity 0.3s ease;
+    -o-transition: margin-top .3s ease, opacity 0.3s ease;
+    transition: margin-top .3s ease, opacity 0.3s ease;
+}
+
+#conteudoFiltro {
+    background-color: black;
+}
+
+
+
+@media (max-width: 991px){
+    .buscaMin {
+       display: block;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+    }
+}
+@media (min-width: 992px){
+    .buscaMin {
+        display: none;
+    }
+}
+
+.seg-plano {
+    opacity: 0.99;
+}
+
+.seg-plano:active {
+    opacity: 0.9;
+}
+
+.seg-plano:hover {
+    opacity: 0.9;
 }

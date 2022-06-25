@@ -1,9 +1,10 @@
-<form id="formularioDash" method="post" action="/" class="centraliza">
+<div id="formularioDash" class="centraliza" aria-disabled="true">
+<input id="idProxPost" style="display: none;" value="<%=IDdeCRIACAO%>">
 <div style="    width: 100%;" class='dashboard-content centraliza'>
     <div class='container-conteudo-dashboard'>
         <div class='card-m'>
             <div class='card-header'>
-                <h1>Seja Bem-Vindo(a) <a style="color: rgb(205, 4, 115);"><%=dono%></a></h1>
+                <h1>Seja Bem-Vindo(a)</h1> <!-- <a style="color: rgb(205, 4, 115);">dono</a>-->
             </div>
             <div class="ld-ld borda">
             <div class='card-body borda'>
@@ -11,10 +12,10 @@
                     <h4 class="titulo">Edição do Card de exibição</h4>
                     <br>
                 <div class="mt-3" style="width: 100%;">
-                    <div class="col-md-6"><label class="labels">Titulo</label><input id="TituloCard" type="text" class="form-control" placeholder="Titulo do Post" value=""></div>
-                    <div class="col-md-6"><label class="labels">Subtitulo</label><input id="SubtituloCard" type="text" class="form-control" value="" placeholder="Subtitulo do Card"></div>
-                    <div class="col-md-6"><label class="labels">Conteudo</label><input id="ConteudoCard" type="text" class="form-control" placeholder="Conteudo do Card" value=""></div>
-                    <div class="col-md-6"><button type="button" style="margin-top: 6%;" href="#" id="selectImg" class="btn btn-primary">selecionar img</button><input id="img" style="display: none;" accept="image/*" type="file" class="form-control" placeholder="img"></div>
+                    <div class="col-md-6"><label class="labels">Titulo</label><input name="CardTituloPost" id="TituloCard" type="text" class="form-control" placeholder="Titulo do Post" value="" required></div>
+                    <div class="col-md-6"><label class="labels">Subtitulo</label><input name="CardSubtituloPost" id="SubtituloCard" type="text" class="form-control" value="" placeholder="Subtitulo do Card" required></div>
+                    <div class="col-md-6"><label class="labels">Conteudo</label><input name="CardTextoPost" id="ConteudoCard" type="text" class="form-control" placeholder="Conteudo do Card" value="" required></div>
+                    <div class="col-md-6"><button type="button" style="margin-top: 6%;" href="#" id="selectImg" class="btn btn-info">selecionar img</button><input name="CardImgPost" id="img" style="display: none;" accept="image/*" type="file" class="form-control" placeholder="img" required></div>
                 </div>
             </div>
             </div>
@@ -23,48 +24,84 @@
                   <img id="imagemCardVisu" class="d-block" style="width: 90%;" src="img/imgteste.jpeg" alt="">
                 </div>
                 <div class="centraliza" style="width: -webkit-fill-available;">
-                <h3  id="tituloVisu" style="text-align: center; width: inherit;margin: 0;">Produto de  Para emagrecer</h3>
-                <small id="subtituloVisu" style="text-align: center; width: inherit; font: -webkit-small-control;text-align: center;" class="text-secondary">quer emagrecer venha ver mais</small>
-                <p id="textoVisu" style="text-align: center; width: inherit; font: -webkit-small-control;text-align: center;">nossos produtos sao os melhores venha ja conferir e ler mais sobre tudo que podemos te oferecer sobre belezea e tudo mais</p>
+                <h3  id="tituloVisu" style="text-align: center; width: inherit;margin: 0;"></h3>
+                <small id="subtituloVisu" style="text-align: center; width: inherit; font: -webkit-small-control;text-align: center;" class="text-secondary"></small>
+                <p id="textoVisu" style="text-align: center; width: inherit; font: -webkit-small-control;text-align: center;"></p>
                    <a href="#" class="btn btn-secondary btn-sm">Ler Mais</a>
                </div> 
               </div>
-
             </div>
-            <div class="centraliza borda">
+              <div class="centraliza borda">
                 <h2 class="titulo">Post do produto</h2>
                 <div class="ld-ld mh-100">
 
 <div style="display: block;width: 100%;" class="borda">
+    <div class="container">
+        <h2>SEO</h2>
                         <div class="w-100">
                             <label class="labels titulo">Palavra-chave</label>
-                            <input id="palavraChave" type="text" class="form-control" placeholder="EX: beleza, promoçâo, vida, saude" value="">
+                            <input name="PalavraChavePostSEO" id="palavraChave" type="text" class="form-control" placeholder="Ex: beleza, promoçâo, vida, saude" value="" required>
                             <small class="form-text text-muted">numero de palavra-chave recomendado: 10</small>
                         </div>
                         <div class="w-100">
-                            <label class="labels titulo">Tag's</label>
-                            <input id="tagsPost" type="text" class="form-control" placeholder="EX: saude, beleza, esporte" value="">
-                            <small class="form-text text-muted">Tag's do Post, recomendado: 5</small>
+                            <label class="labels titulo">Titulo da Pagina</label>
+                            <input name="TituloPostSEO" id="tituloPagePost" type="text" class="form-control" value="" required>
+                            <small class="form-text text-muted">Ajuda no SEO, use um titulo com palavras chave para este anuncio</small>
                         </div>
                         <div class="w-100">
+                            <label class="labels titulo">Descrição da Pagina</label>
+                            <input name="DescricaoPostSEO" id="descricaoPagePost" type="text" class="form-control" value="" required>
+                            <small class="form-text text-muted">Ajuda no SEO, use uma Descrição chamativa para este anuncio </small>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <h2>Informações do Post</h2>
+                        <div class="w-100">
+                            <label class="labels titulo">Tag's</label>
+                            <input name="TagsPostConteudo" id="tagsPost" type="text" class="form-control" placeholder="Ex: saude, beleza, esporte" value="" required>
+                            <small class="form-text text-muted">Tag's do Post, recomendado: 5</small>
+                        </div>
+                     
+
+                        <div class="container" style="padding: 0;">
+                            <!-- For demo purpose -->
+                            <div class="row">
+                                <div class="col-lg-6" style="padding: 0 !important;padding-top: 6% !important;padding-bottom: 6% !important;">
+                                    <label class="labels titulo">Categoria do post</label>
+                                    <!-- Multiselect dropdown -->
+                                    <select id="CategoriaPost" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
+                                        <% if (categorias.length > 0){ %>
+                                                      <% for (let categoria of categorias){ %>
+                                                        <option id="<%=categoria.id%>"><%=categoria.nome%></option>
+                                                    <% }}%>
+                                    </select><!-- End -->
+                                </div>
+                            </div>
+                            
+                        </div>
+
+
+                        <div class="w-100">
                             <label class="labels titulo">autor do Post</label>
-                            <input id="autorPost" type="text" class="form-control" placeholder="" value="">
+                            <input name="AutorPostConteudo" id="autorPost" type="text" class="form-control" placeholder="" value="" required>
                         </div>
                         <div class="w-100">
                             <label class="labels titulo">Link do Produto</label>
-                            <input id="linkProduto" type="text" class="form-control" placeholder="" value="">
+                            <input name="LinkAfiliadoPostConteudo" id="linkProduto" type="text" class="form-control" placeholder="" value="" required>
                         </div>
                         <div class="w-100">
                             <label class="labels titulo">Titulo</label>
-                            <input id="tituloPostOFC" type="text" class="form-control" placeholder="Titulo" value="">
+                            <input name="TituloPostConteudo" id="tituloPostOFC" type="text" class="form-control" placeholder="Titulo" value="" required>
                         </div>
                         <div class="w-100" style="height: 10em;">
                             <label class="labels titulo">Texto 1</label>
-                            <textarea id="texto1PostOFC" type="text" style="height: 80% !important;" class="form-control" placeholder="Texto" value=""></textarea>
+                            <textarea name="TextoPostConteudo" id="texto1PostOFC" type="text" style="height: 80% !important;" class="form-control" placeholder="Texto" value="" required></textarea>
                         </div>
+                    <button type="button" style="margin-top: 6%;" href="#" id="selectImgPost" class="btn btn-info">selecionar img</button><input name="ImgPostConteudo" id="imgPost" style="display: none;" accept="image/*" type="file" class="form-control" placeholder="img">
+                    </div>
 </div>
 
-<div class="borda" style="height:34.8em;overflow-y: scroll;max-height: 34.8em;;max-width: -webkit-fill-available;width: 100%;">
+<div class="borda" style="height:58.6em;overflow-y: scroll;max-height: 58.6em;;max-width: -webkit-fill-available;width: 100%;">
     <header class="sticky-top">
         <!--Menu antes do colappso-->
             <div class="pos-f-t">
@@ -90,13 +127,13 @@
                     <a class="nav-link" aria-current="page" href="#">Contato</a>
                   </li>
                   <li>
-                    <a class="nav-link" aria-current="page" href="<%=url%>/login">Login</a>
+                    <a class="nav-link" aria-current="page" href="/login">Login</a>
                   </li>
                   </ul>
                   <div class="menuSS">
                   <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-secondary" type="submit">Search</button>
+                    <button class="btn btn-secondary" type="button">Search</button>
                   </form>
                 </div>
                 </div>
@@ -113,20 +150,21 @@
                     <!-- Post header-->
                     <header class="mb-4">
                         <!-- Post title-->
-                        <h1 id="tituloPost" class="fw-bolder mb-1"><%=tituloPost%></h1>
+                        <h1 id="tituloPost" class="fw-bolder mb-1"></h1>
                         <!-- Post meta content-->
-                        <div id="autorPost" class="text-muted fst-italic mb-2subtituloPost">Postado <%=dataPost%> por <%=donoPost%></div>
+                        <div id="autorPost" class="text-muted fst-italic mb-2subtituloPost"><span id="EXEMPLOdata"></span><span id="EXEMPLOautor"></span></div>
                         <!-- Post categories-->
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%=tagPost%></a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%=tagPost%></a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%=tagPost%></a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%=tagPost%></a>
+                        <div id="EXEMPLOtags" class="w-100">
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Saude</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Saude</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Saude</a>
+                        </div>
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img style="width: 100%;" class="img-fluid rounded" src="<%=urlImgPost%>" alt="..." /></figure>
+                    <figure class="mb-4"><img id="imgPostEx" style="width: 100%;" class="img-fluid rounded" src="<%=urlImgPost%>" alt="..." /></figure>
                     <!-- Post content-->
                     <section class="centraliza mb-5">
-                        <p id="texto1Post" class="fs-5 mb-4"><%=paragrafo1Post%></p>
+                        <p id="texto1Post" class="fs-5 mb-4"></p>
                         <a href="#" class="w-25 btn btn-primary btn-sm">Comprar</a>
                     </section>
                 </article>
@@ -172,11 +210,11 @@
                 </div>
 
                 </div>
+                <div class="w-100 centraliza">
+                    <button type="button" id="CriaPostViaAjax" style="width: auto;" class="btn btn-danger btn-sm">Criar</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="w-100 centraliza">
-    <button type="submit" style="width: 15%;" class="btn btn-secundary">Criar</button>
 </div>
-</form>

@@ -1,0 +1,81 @@
+<div class="w-100 bg-white" style="padding: 0;">
+    <!-- For demo purpose -->
+    <div class="card-m">
+        <div style="padding:0 !important;" class="centraliza">
+
+            <div class="card-header w-100">
+               <h3>EDIÇÔES</h3>
+            </div>
+
+            <div id="edicaoCategoria" class="centraliza" style="padding-top: 5%;width: 80%;">
+            <label class="labels titulo text-dark">Editar Categorias</label>
+           <!--Dropdown categorias-->
+            <select id="CategoriaPost" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm" style="height: 7em;" class="selectpicker w-100">
+                <% if (categorias.length > 0){ %>
+                              <% for (let categoria of categorias){ %>
+                                <option id="<%=categoria.id%>"><%=categoria.nome%></option>
+                            <% }}%>
+            </select>
+            <div style="display: block;">
+            <button id="ExcluiCategoria" type="button" class="btn btn-outline-danger">Excluir<i class="fa fa-trash" aria-hidden="true"></i></button> 
+          
+            <button id="CriarCategoria" type="button" class="btn btn-outline-success">
+                Adicionar<i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+        
+        </div>    
+            </div>
+        
+            <div class="card-footer w-100">
+            </div>
+
+        </div>
+   
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="CriaCategoria" tabindex="-1" role="dialog" aria-labelledby="CriaCategoriaLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="CriaCategoriaLabel">Cria categoria</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form class="was-validated">
+            <div class="form-group form-check">
+            <label class="form-check-label">Nome
+            <input type="text" id="inputNomeNovaCategoria" class="form-control" aria-describedby="nome da categoria" name="NomeCategoria" required>
+            <div id="nomeDaCategoriaInvalidoLabel" class="invalid-feedback">Por favor, insira um nome para a categoria.</div>
+            <div id="emailFormvalid" class="valid-feedback">Nome valido.</div>
+            </label>
+        </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          <button id="criaCategoriaAjax" type="button" class="btn btn-primary">Criar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="MensagemPerson" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="Titulo_Mensagem"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="Texto_Mensagem">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>

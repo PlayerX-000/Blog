@@ -1,20 +1,17 @@
-require('dotenv').config();
 const jwt = require("jsonwebtoken");
-const id = process.env.ID;
-const segredo = process.env.SECRET;
-const tempo_cookie = process.env.TEMPO_COOKIE;
-const titulo = process.env.TITULO;
-const marca = process.env.MARCA;
-const url = process.env.URL;
+const variaveis = require("../../bd/variaveis")
+const vars = variaveis.vars();
+
 
 exports.criaToken = (req,res,next) => {
     limpaCookieFuncao(res)
     try {
-    const token = jwt.sign({id:id},segredo,{expiresIn: `${tempo_cookie}`});
+    const { email } = req.body;
+    const token = jwt.sign({email:email},vars.jwt.segredo,{expiresIn: `${vars.jwt.expira_em}`});
     
     res.cookie("authorization",token,{
     httpOnly: true,
-    maxAge: tempo_cookie,
+    maxAge: vars.jwt.expira_em,
     signed: false,
     path: "/",
     secure: true
@@ -32,7 +29,7 @@ if(!token){
     return RedirecionaPaginaLogin(res)
 };
 try {
-jwt.verify(token,segredo);
+jwt.verify(token,vars.jwt.segredo);
 next()
 } catch (error) {
     limpaCookieFuncao(res)
@@ -51,8 +48,7 @@ function limpaCookieFuncao(res) {
 
 function RedirecionaPaginaLogin(res){
         res.status(200).render("../view/login.ejs",{
-        marca:marca,
-        titulo:titulo,
-        url:url
+        marca:vars.marca,
+        titulo:vars.titulo
     });
 }

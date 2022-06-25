@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="pt-BR">
+<head>
+    <meta http-equiv="content-language" content="pt-br">
+    <meta name="author" content="kauan.mghenrique@gmail.com">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Divulgação de produtos, venha ja conferir">
+    <meta name="keywords" content="cosmeticos, beleza, vida, cuidados, pele, produtos,"/>
+    <meta name="robots" content="all" />
+    <title><%= titulo%></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    <link rel="stylesheet" type="text/css" href="css/colors/teme.css"/>
+</head>
+<body>
+<header class="sticky-top">
+  <!--Menu apos o colappso-->
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-menu p-4">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="opcNav nav-link link" id="home-tab" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="opcNav nav-link link" aria-current="page" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="opcNav nav-link link" id="categria-tab" href="/categorias">Categorias</a>
+          </li>
+          <li class="nav-item">
+            <a class="opcNav nav-link link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Contato</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">CAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+        </div>
+    </div>
+  </div>
+  <!--Menu antes do colappso-->
+      <div class="pos-f-t">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-menu">
+        <div class="container-fluid">
+          <a id="logoSite" class="navbar-brand" style="font-size: calc(31px + (48 - 31) * ((100vw - 400px) / (2600 - 400)));" href="/"><%= marca%></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+           <div class="collapse navbar-collapse justify-content-space-between" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="/categorias">Categorias</a>
+            </li> 
+              <li>
+              <a class="nav-link" aria-current="page" href="#">Contato</a>
+            </li>
+            <li>
+              <a class="nav-link" aria-current="page" href="/login">Login</a>
+            </li>
+            </ul>
+            <div class="menuSS">
+            <form class="d-flex" action="/pesquisa" method="post">
+              <input name="valorPesquisa" class="form-control me-2" type="search" placeholder="" aria-label="Search">
+              <button class="btn btn-secondary" type="submit">Ir</button>
+            </form>
+          </div>
+          </div>
+        </div>
+      </nav>
+      </div>
+</header>
+<main>
+    <div class="buscaMin w-100">
+        <div class="card-m w-100 borda" style="border-radius: 7px;">
+        <div class="card-header" style="opacity: 0.5;"><h4 style="text-align: center;">Buscar</h4></div>
+        <form class="d-flex" style="justify-content: center;" action="/pesquisa" method="post">
+          <input name="valorPesquisa" class="seg-plano w-50 form-control" type="search" placeholder="" aria-label="Search">
+          <button class="btn btn-secondary seg-plano" type="submit">Ir</button>
+        </form>
+      </div>
+      </div>
+      <hr/>
+      <article class="article-index">
+        <div class="containerr" style="background: #ffffff59; width: -webkit-fill-available; height: auto;background: #ffffff59;">
+          <% if (posts.length > 0){ %>
+                      <% for (let post of posts){ %>
+                    <div class="cards centraliza" style="height: auto;">
+                      <div class="centraliza">
+                        <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
+                      </div>
+                      <div class="centraliza">
+                      <h3 style="margin: 0;"><%=post.card_titulo%></h3>
+                      <small class="text-secondary"><%=post.card_subtitulo%></small>
+                      <p style="text-align: center;"><%=post.card_texto%></p>
+                         <a href="/post/<%=post.id%>" class="btn btn-secondary btn-sm">Ler Mais</a>
+                     </div> 
+                    </div>
+                    <% }}%>
+        </div>
+      </article>
+</main>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<%- include('include/footer.ejs')%>
