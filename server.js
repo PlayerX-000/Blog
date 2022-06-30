@@ -1,24 +1,26 @@
 const express = require("express")
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+const getUpdateEstatistica = require("./socket_/estatistica_socket")
 const rotas = require("./routes/router");
 const path = require('path');
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || 'localhost';
+const dados = require("./socket_/run");
 
 (async()=>{
   try {
     const database = require("./bd/conexao");
-    const Usuarios = require("./model/Usuarios");
-    const InfClient = require("./model/InformacoesClientes");
-    const Postagens = require("./model/Postagens");
-    const Categorias = require("./model/Categorias");
+   // await user.create({email:"kauan@gmail.com",senha:"123",nome:"kauan",nivel:"administrador"})
     await database.sync();
-    console.log(`-------Banco de Dados Iniciado------- \n\n`);
   } catch (error) {
-    console.log(`-------Erro ao Iniciar Banco de Dados-------`);
-    console.log(error)
+    throw error
   }
 })();
 
@@ -27,19 +29,34 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 app.use(rotas);
-app.use('/imagensPosts',express.static(path.join(__dirname,'/imagensPosts')))
+app.use('/imagensPosts',     express.static(path.join(__dirname,'/imagensPosts')))
 app.use('/post/imagensPosts',express.static(path.join(__dirname,'/imagensPosts')))
-app.use('/post/',express.static(path.join(__dirname,'./public/')))
+app.use('/post/',            express.static(path.join(__dirname,'./public/')))
 app.use(express.static(path.join(__dirname,'./public/')));
 
 app.set('view engine','ejs');
 app.set('views','views');
 
-app.listen(port,host,()=>{
-    console.log(`-------Servidor Iniciado-------`);
-    console.log(`\n* http://${host}:${port} \n`);
-    console.log(`* port: ${port}`);
-    console.log(`* host: ${host}`);
+
+io.on('connection', async(socket) => {
+await getUpdateEstatistica.atualizaEstatistica()
+dados.UsuariosOnlineControle(1);
+io.emit("estatisticaBlog",getUpdateEstatistica.estatisticas)
+socket.on("index",dados.estatisticas)
+socket.on('disconnect', ()=>dados.UsuariosOnlineControle(-1));
+socket.on("rankPost",dados.rank_post)
+
+setInterval(async()=>{
+const online_ = dados.getUsersOnline()
+io.emit("user_on",online_)
+},4000)
+setInterval(async()=>{
+io.emit("estatisticaBlog",getUpdateEstatistica.estatisticas)
+},60000)
+});
+
+server.listen(port,host,()=>{
   }).on('error',(err)=>{ 
-    console.error("ERRO ao Iniciar Servidor",err)
+    console.error("ERRO ao Iniciar Servidor");
+    throw err;
   });

@@ -12,7 +12,6 @@
     <meta name="robots" content="all" />
     <title><%= titulo%></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/css.css"/>
     <link rel="stylesheet" type="text/css" href="css/colors/teme.css"/>
 </head>
@@ -44,7 +43,7 @@
       <div class="pos-f-t">
     <nav class="navbar navbar-expand-lg navbar-dark bg-menu">
         <div class="container-fluid">
-          <a id="logoSite" class="navbar-brand" style="font-size: calc(31px + (48 - 31) * ((100vw - 400px) / (2600 - 400)));" href="#"><%= marca%></a>
+          <a id="logoSite" class="navbar-brand" style="font-size: calc(31px + (48 - 31) * ((100vw - 400px) / (2600 - 400)));" href="/"><%= marca%></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -65,8 +64,8 @@
             </ul>
             <div class="menuSS">
             <form class="d-flex" action="/pesquisa" method="post">
-              <input name="valorPesquisa" class="form-control me-2" type="search" placeholder="" aria-label="Search">
-              <button class="btn btn-secondary" type="submit">Ir</button>
+              <input style="background-color: white !important;" name="valorPesquisa" class="form-control me-2" type="search" placeholder="" aria-label="Search">
+              <button class="btn btn-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
           </div>
           </div>
@@ -125,8 +124,8 @@
 <div class="buscaMin w-100">
   <div class="card-m borda bg-dark" style="width: 100%;border-radius: 4px;">
     <form class="d-flex" style="justify-content: center;background-color: #262626;" action="/pesquisa" method="post">
-      <input name="valorPesquisa" class="seg-plano w-100 form-control" type="search" placeholder="" aria-label="Search">
-      <button class="btn btn-secondary seg-plano" type="submit">Ir</button>
+      <input style="background-color: white !important;" name="valorPesquisa" class="seg-plano w-100 form-control" type="search" placeholder="" aria-label="Search">
+      <button class="btn btn-secondary seg-plano" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
 </div>
 <hr>
@@ -189,6 +188,27 @@
   </div>
 </div>
 
+<div class="modal fade" id="TermoDeResponsabilidade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Termo de Responsabilidade</h5>
+      </div>
+      <div class="modal-body" style="overflow: auto;height: 20em;font-size: clamp(1em, 1em + 1vw, 1em); text-align: justify; -webkit-text-stroke-width: thin;">
+        Todas as dicas e conceitos apresentados neste blog têm como objetivo apenas informa, educar, e indicar produtos seguros. Este blog foi disponibilizado com esse objetivo , e não tem intenção nenhuma de servir como orientação médica, prescrição ou substituir diagnóstico de profissionais. Nenhuma informação e dicas deste blog substitui uma consulta com o seu médico, nutricionista ou personal . O propósito do blog é apenas ajudar a complementar sua saúde e Bem-Estar com dicas de produtos para saude com base em estudos. Somente um médico poderá avaliar e  dizer se você está apto ou não a estas alterações. Tenha em mente que os resultados aqui apresentados são de pessoa reais ,mas não garante que você terá o mesmo resultado , isso varia de organismo para organismo e claro, dedicação e disciplina também conta.
+      </div>
+      <div class="modal-footer">
+        <div class="form-check ld-ld" style="margin: 0;width: 100%; height: initial; display: flex; flex-wrap: nowrap; align-content: stretch; align-items: center; justify-content: space-between; flex-direction: row;">
+          <input data-dismiss="modal" class="form-check-input" type="checkbox" value="" id="TermoCheck">
+          <label class="form-check-label" for="flexCheckChecked">
+            Concordo
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="width-100 centraliza">
 <section class="border box-text">
   <h1 class="font-weight-bold">Seja Bem-Vindo</h1>
@@ -214,7 +234,7 @@
           <h3 style="margin: 0;"><%=post.card_titulo%></h3>
           <small class="text-secondary"><%=post.card_subtitulo%></small>
           <p style="text-align: center;"><%=post.card_texto%></p>
-             <a href="/post/<%=post.id%>" class="btn btn-secondary btn-sm">Ler Mais</a>
+             <a href="/post/<%=post.id%>" onclick="censo('<%=post.id%>')" class="btn btn-secondary btn-sm">Ler Mais</a>
          </div> 
         </div>
         <% }}%>
@@ -223,9 +243,11 @@
 </section>
 </main>
 
-
+<script src="/socket.io/socket.io.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/pegaInformacoesIndex.js"></script>
+
 <%- include('include/footer.ejs')%>

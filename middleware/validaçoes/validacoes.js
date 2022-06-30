@@ -14,13 +14,16 @@ exports.validaUsuario = async(req,res,next) => {
         erro = "Senha obrigatorio";
         RedirecionaPaginaLogin(res,erro)
     }
-    
-    const conta = await sql.getUsuarioDados(email);
+    const regra = {
+        where:{
+            email
+        }
+    }
+    const conta = await sql.getUsuarioDados(regra);
     const dados = conta[0]
-
-    if(!dados){
+    if(dados==undefined){
         erro = "E-mail não cadastrado";
-        RedirecionaPaginaLogin(res,erro)
+       return RedirecionaPaginaLogin(res,erro)
     }
 
     if(senha===dados.senha){

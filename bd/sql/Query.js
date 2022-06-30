@@ -3,15 +3,18 @@ const Usuario = require("../../model/Usuarios")
 const Postagem = require("../../model/Postagens")
 const infoCliente = require("../../model/InformacoesClientes")
 const Categoria = require("../../model/Categorias")
+const Estatistica = require("../../model/Estatistica")
+const RankPosts = require("../../model/RankPosts")
 const sequelize = require("sequelize");
+const Localidade = require("../../model/Locais");
+const RankPost = require("../../model/RankPosts");
+const data = new Date();
+const anoAtual = data.getUTCFullYear()
 
 //Query Usuario
-exports.getUsuarioDados = async(email)=>{
+exports.getUsuarioDados = async(regra)=>{
     try {
-      const usuario = await Usuario.findAll({
-        where: {
-          email
-      }});
+      const usuario = await Usuario.findAll(regra);
     return usuario;
     } catch (error) {
       throw error;
@@ -38,9 +41,9 @@ exports.updateUsuarioDados = async(nome,senha,nivel,email,emailAntigo,senhaAntig
 };
 
 //Query Cliente
-exports.createInfoClientes = async(nome,email)=>{
+exports.createInfoClientes = async(regra)=>{
 try {
-  await infoCliente.create({ nome, email });
+  await infoCliente.create(regra);
 } catch (error) {
   throw error;
 };
@@ -48,7 +51,7 @@ try {
 
 exports.getInfoClientes = async() => {
   try {
-   const informacoes = await infoCliente.findAll();
+   return await infoCliente.findAll();
    return informacoes;
   } catch (error) {
     throw error;
@@ -137,9 +140,9 @@ const postagem = postagemArr[0]
       };
   
 
-exports.getAllPostagem = async() => {
+exports.getAllPostagem = async(regra) => {
       try {
-       const postagem = await Postagem.findAll();
+       const postagem = await Postagem.findAll(regra);
        return postagem;
       } catch (error) {
         throw error;
@@ -147,19 +150,35 @@ exports.getAllPostagem = async() => {
       };
 
 
-exports.getPostagemFavorita = async() => {
-  try {
-   const postagem = await Postagem.findAll({
-    where:{
-      favorito:false
+
+
+  exports.alteraPostFavorito = async(id) => {
+    try {
+     const postAlterar = await Postagem.findAll({where:{id}})
+     const favorito = !postAlterar[0].favorito
+      await Postagem.update({favorito},{
+        where:{
+          id
+        }
+      })
+      return
+    } catch (error) {
+      throw error
     }
-   });
- 
+    }
+
+exports.deletarPost = async(id) => {
+  try {
+    await Postagem.destroy({
+      where:{
+        id
+      }
+    })
   } catch (error) {
-    throw error;
-  };
-  };
-    
+    throw error
+  }
+  }
+
 //Query Categoria
 exports.deletaCategoria = async(id)=>{
   try {
@@ -168,7 +187,7 @@ await Categoria.destroy({
         id
   }
 });
-console.log("\n\n\n\n\n\n\n\n\n\n\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+
 return true
   } catch (error) {
     throw error
@@ -207,4 +226,66 @@ exports.getAllCategoria = async()=>{
   } catch (error) {
     throw error;
   };
+};
+
+
+//Query Estatistica
+exports.CriaEstatistica=async(regra)=>{
+  try {
+  return await Estatistica.create(regra)
+  } catch (error) {
+    throw error
+  }
+};
+exports.AlteraEstatistica=async(alteracao,regra)=>{
+  try {
+  return await Estatistica.update(alteracao,regra)
+  } catch (error) {
+    throw error
+  }
+};
+exports.GetEstatistica=async(regra={where:{ano:`${anoAtual}`}})=>{
+  try {
+  return await Estatistica.findAll(regra)  
+  } catch (error) {
+    throw error
+  }
+};
+//Query Rank Posts
+exports.CriaRankPosts=async(regra)=>{
+  try {
+    return await RankPost.create(regra)
+  } catch (error) {
+    throw error
+  }
+};
+exports.AlteraRankPosts=async(update,where)=>{
+  try {
+    return await RankPost.update(update,where)
+  } catch (error) {
+    throw error
+  }
+};
+exports.GetRankPosts=async(regra={where:{ano:`${anoAtual}`}})=>{
+  try {
+    return await RankPost.findOne(regra)
+  } catch (error) {
+    throw error
+  }
+};
+//Query Localidades
+exports.CriaLocalidade=async(regra)=>{
+  try {
+  await Localidade.create(regra);
+  return true;
+  } catch (error) {
+    throw error
+  }
+};
+exports.GetLocalidade=async(regra)=>{
+  try {
+  return await Localidade.findOne(regra)
+  } catch (error) {
+    throw error
+  }
 };

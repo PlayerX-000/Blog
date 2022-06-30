@@ -1,6 +1,5 @@
 $(window).load(()=>{
 $("#dataFiltro").click(function(){
-  console.log("clicado")
 let NovoArray = []
 const dataOrdem = document.getElementById("OrdemData")
 window.postsFiltrados.forEach(element => {
@@ -20,6 +19,21 @@ insereCards(NovoArray)
 
   $("#categoriaFiltro > a").click(function(dados){
   const IDcategoria = dados.currentTarget.attributes.id.nodeValue
+  if(IDcategoria=="todas"){
+    $.ajax({
+      url: "/todosPosts",
+      method: "GET",
+  success: function(res){
+  window.postsFiltrados = res;
+  const resultadoBusca = document.getElementById("ResultadosFiltro");
+  const dataOrdem = document.getElementById("OrdemData");
+  resultadoBusca.innerText = `${res.length}`;
+  dataOrdem.innerText = "Mais antigo";
+  insereCards(res);
+  }
+  });
+return  
+}
   $.ajax({
     url: "/PostPorCategoria",
     method: "POST",

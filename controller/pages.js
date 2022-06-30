@@ -3,7 +3,8 @@ const variaveis = require("../bd/variaveis")
 const vars = variaveis.vars();
 
 exports.initial = async(req, res) => { 
-      const Posts = await sql.getAllPostagem()
+      const regra = {where:{favorito:true}}
+      const Posts = await sql.getAllPostagem(regra)
       res.render("../view/index.ejs",{
             marca:vars.marca,
             titulo:vars.titulo.index,
@@ -18,11 +19,16 @@ exports.login = (req, res) => {
  })
 }
 
-exports.painel = (req, res) => { 
+exports.painel = async(req, res) => { 
+      const regra = {};
+      
+      const usuarioArr = await sql.getUsuarioDados(regra);
+      const usuario = usuarioArr[0]
       res.render("../view/dashboard.ejs",{
             marca:vars.marca,
-            titulo:vars.titulo.painel,
-            dono:vars.dono,     
+            titulo:vars.titulo.login,
+            dono:usuario.nome,  
+            nivelUsuario:usuario.nivel 
  })
 }
 
@@ -50,6 +56,15 @@ exports.post = async(req, res) => {
       })
 }
 
+
+exports.estatisticasItem = async(req, res) => {
+      res.render("../view/itensPainel/estatisticas_.ejs",{
+            marca:vars.marca,
+            titulo:vars.titulo.painel,
+            dono:vars.dono
+      })
+}
+
 exports.perfilItem = (req, res) => { 
       res.render("../view/itensPainel/perfil_.ejs",{
             marca:vars.marca,
@@ -59,9 +74,15 @@ exports.perfilItem = (req, res) => {
 }
 
 exports.configuracoesItem = async(req, res) => { 
-      const categorias = await sql.getAllCategoria()
+      const fav = {where:{favorito:false}};
+      const nrm = {where:{favorito:true}};
+      const posts = await sql.getAllPostagem(fav)
+      const favorito = await sql.getAllPostagem(nrm);
+      const categorias = await sql.getAllCategoria();
       res.status(200).render("../view/itensPainel/configuracoes_.ejs",{
-            categorias
+            categorias,
+            favorito,
+            posts
       })
 }
 

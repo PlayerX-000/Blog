@@ -1168,3 +1168,34 @@ div#filtraPosts.card-m {
 .seg-plano:hover {
     opacity: 0.9;
 }
+
+.favorito-card {
+    background-color: transparent;
+    color: rgb(118 118 118 / 80%);
+}
+.favorito-card:hover {
+    background-color: transparent;
+    color: rgba(221, 255, 0, 0.433);
+}
+.favorito-card:active {
+    background-color: transparent;
+    color: rgb(221, 255, 0);
+}
+
+.favorito-card.cardFavorito-true {
+    background-color: transparent;
+    color: rgb(221, 255, 0);
+}
+
+.deletar-card {
+    background-color: transparent;
+    color: rgb(118 118 118 / 80%);
+}
+.deletar-card:hover {
+    background-color: transparent;
+    color: rgba(255, 0, 0, 0.433);
+}
+.deletar-card:active {
+    background-color: transparent;
+    color: rgb(227, 0, 0);
+}

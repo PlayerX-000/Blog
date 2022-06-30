@@ -6,8 +6,10 @@
             <div class="card-header w-100">
                <h3>EDIÇÔES</h3>
             </div>
-
-            <div id="edicaoCategoria" class="centraliza" style="padding-top: 5%;width: 80%;">
+            <div style="padding-top: 5%" class="centraliza w-100">
+              <h4>Categorias</h4>
+           </div>
+            <div id="edicaoCategoria" class="centraliza" style="width: 80%;">
             <label class="labels titulo text-dark">Editar Categorias</label>
            <!--Dropdown categorias-->
             <select id="CategoriaPost" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm" style="height: 7em;" class="selectpicker w-100">
@@ -25,7 +27,65 @@
         
         </div>    
             </div>
-        
+        <hr>
+        <div class="centraliza w-100">
+          <h4>Cards</h4>
+       </div>
+       <div class="centraliza" style="width: 80%;">
+        <label class="labels titulo text-dark">Editar Cards/Posts</label>  
+
+        <section style="width: 80%;" class="section-index">
+          <article class="article-index">
+            <h6>Favoritos</h6>
+              <div id="postsFavoritos" class="borda containerr" style="background: #ffffff59;">
+                <% if (favorito.length > 0){ %>
+                  <% for (let post of favorito){ %>
+                    <div id="post<%=post.id%>" class="cards centraliza" style="width: calc(28% + (53 - 28) * ((100vw - 400px) / (2600 - 400))) !important;position:relative;height: auto;">
+                      <a name="funcoesConfg" style="position: absolute; width: 100%; height: -webkit-fill-available;">
+                        <i name="favaltpost" id="AlteraFav-<%=post.id%>" style="position: absolute; left: 6%; font-size: x-large;" class="favorito-card cardFavorito-<%=post.favorito%> fa fa-star" aria-hidden="true"></i>
+                        <i name="delpos" id="PostDeletar-<%=post.id%>" style="position: absolute; right: 6%; font-size: x-large;" class="deletar-card fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                      <div class="centraliza">
+                        <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
+                      </div>
+                      <div style="width: 95%;" class="centraliza">
+                        <h3 style="margin: 0;"><%=post.card_titulo%></h3>
+                        <small class="text-secondary"><%=post.card_subtitulo%></small>
+                        <p style="overflow-wrap: anywhere;text-align: center;"><%=post.card_texto%></p>
+                           <a href="/post/<%=post.id%>" class="btn btn-secondary btn-sm">Ler Mais</a>
+                     </div> 
+                    </div>
+        <% }}%>
+        </div>
+        </article>
+        </section>
+
+        <section style="width: 80%;" class="section-index">
+  <article class="article-index">
+    <h6>Posts</h6>
+      <div id="postsNormais" class="borda containerr" style="background: #ffffff59;">
+        <% if (posts.length > 0){ %>
+          <% for (let post of posts){ %>
+ <div id="post<%=post.id%>" class="cards centraliza" style="width: calc(28% + (53 - 28) * ((100vw - 400px) / (2600 - 400))) !important;position:relative;height: auto;">
+  <a name="funcoesConfg" style="position: absolute; width: 100%; height: -webkit-fill-available;">
+    <i name="favaltpost" id="AlteraFav-<%=post.id%>" style="position: absolute; left: 6%; font-size: x-large;" class="favorito-card cardFavorito-<%=post.favorito%> fa fa-star" aria-hidden="true"></i>
+    <i name="delpos" id="PostDeletar-<%=post.id%>" style="position: absolute; right: 6%; font-size: x-large;" class="deletar-card fa fa-trash" aria-hidden="true"></i>
+  </a>
+  <div class="centraliza">
+    <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
+  </div>
+  <div style="width: 95%;" class="centraliza">
+    <h3 style="margin: 0;"><%=post.card_titulo%></h3>
+    <small class="text-secondary"><%=post.card_subtitulo%></small>
+    <p style="overflow-wrap: anywhere;text-align: center;"><%=post.card_texto%></p>
+       <a href="/post/<%=post.id%>" class="btn btn-secondary btn-sm">Ler Mais</a>
+ </div> 
+</div>
+<% }}%>
+</div>
+</article>
+</section>
+      </div>
             <div class="card-footer w-100">
             </div>
 

@@ -20,7 +20,6 @@ exports.criaPostagem = async(req,res) =>{
     } = req.body
     const idCategoria = JSON.parse(Categoria)
 try {
-    console.log(idCategoria)
     await sql.createPostagem(CriacaoPostData,urlPost,TextoPostConteudo,TituloPostConteudo,LinkAfiliadoPostConteudo,AutorPostConteudo,TagsPostConteudo,DescricaoPostSEO,TituloPostSEO,PalavraChavePostSEO,urlCard,CardTextoPost,CardSubtituloPost,CardTituloPost,idCategoria)
 } catch (error) {
     throw error

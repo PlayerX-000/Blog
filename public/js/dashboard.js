@@ -27,7 +27,7 @@ $(document).ready(function () {
        
 $.ajax({
     url: "/logoutItem",
-    method: "GET",
+    method: "POST",
 success: function(res){
 const pag = document.querySelector("html");
 pag.innerHTML = res
@@ -126,6 +126,50 @@ dad.prop('disabled', true);
 }
 });
 })
+
+
+$("a[name='funcoesConfg'] > i").click((inf)=>{
+const funcao = inf.currentTarget.attributes.name.nodeValue
+if(funcao=="favaltpost"){
+const idPost = (inf.currentTarget.attributes.id.nodeValue).split("-")[1]
+
+$.ajax({
+  url: "/alteraPost",
+  method: "POST",
+  data:{
+    id:idPost
+  },
+success: function(){
+const elemento = document.getElementById(`post${idPost}`)
+const paiElement = elemento.parentNode
+const seccNorm = document.getElementById("postsNormais")
+const seccFav = document.getElementById("postsFavoritos")
+ if(paiElement.id=="postsNormais"){
+  seccFav.appendChild(elemento)
+  elemento.childNodes[1].childNodes[1].className += " cardFavorito-true"
+ }
+ if(paiElement.id=="postsFavoritos"){
+  seccNorm.appendChild(elemento)
+  const naoFavoritoClass = (elemento.childNodes[1].childNodes[1].className).replace("cardFavorito-true","")
+  elemento.childNodes[1].childNodes[1].className = naoFavoritoClass
+ }
+}
+})
+}else if(funcao=="delpos"){
+  const idPost = (inf.currentTarget.attributes.id.nodeValue).split("-")[1]
+  $.ajax({
+    url: "/deletaPost",
+    method: "POST",
+    data:{
+      id:idPost
+    },
+  success: function(){
+    const post = document.getElementById(idPost)
+    const pai = post.parentNode
+    pai.removeChild(post)
+  }
+})}
+})
 }})
 })
 
@@ -197,7 +241,6 @@ document.getElementById("EXEMPLOdata").innerText = `Postado ${getData()}`
                   const url = URL.createObjectURL(this.files[0]);
               const inf = this.files[0].name + ": " + this.files[0].size + " bytes";
             imgCard.src = url
-                console.log(inf)
             }
             
   
@@ -234,7 +277,6 @@ document.getElementById("EXEMPLOdata").innerText = `Postado ${getData()}`
                   const url = URL.createObjectURL(this.files[0]);
               const inf = this.files[0].name + ": " + this.files[0].size + " bytes";
             imgCard2.src = url
-                console.log(inf)
             }
           })
           $("#CriaPostViaAjax").click((dad)=>{
@@ -332,3 +374,9 @@ $.ajax({
         })
         })
 });
+
+
+ const HTML_userON = $("#userOn")[0];
+    socket.on("user_on",(users)=>{
+    HTML_userON.innerText = `${(users-1)}`
+    })

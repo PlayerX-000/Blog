@@ -15,7 +15,7 @@ expira_em:36000000
 },
 
 dono: "Kauan",
-marca:"Luvorier",
+marca:"Blog - Sua Saúde",
 
 titulo: {
     index:"Luv | la prime",
@@ -26,6 +26,5 @@ titulo: {
 imgCard: {
     teste:"img/cadastrar_email.jpeg"
 }    
-
 };
 };

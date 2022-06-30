@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+   
     <header class="sticky-top">
         <!--Menu antes do colappso-->
             <div class="pos-f-t">
@@ -63,7 +64,7 @@
                 <a id="configuracoesItem" style="color: azure;" class="dashboard-nav-item">
                 <i class="fas fa-cogs"></i> Configurações </a>
 
-                <a href="/estatisticas" style="color: azure;" class="dashboard-nav-item">
+                <a href="/estatisticas" id="estatisticasItem" style="color: azure;" class="dashboard-nav-item">
                 <i class="fa fa-bar-chart" aria-hidden="true"></i>Estatisticas </a>
 
                 <a id="perfilItem" style="color: azure;" class="dashboard-nav-item">
@@ -74,31 +75,28 @@
             </nav>
         </div>
 
-        <div class='dashboard-app' id="conteudo" style="    height: 100%;">       
-           <div class='dashboard-content'>
-                <div class='container-conteudo-dashboard'>
-                    <div class='card-m'>
-                        <div class='card-header'>
-                            <h1>Seja Bem-Vindo(a) <a style="color: rgb(205, 4, 115);"><%=dono%></a></h1>
-                        </div>
-                        <div class='card-body'>
-                            <p style="color: rgb(205, 4, 4);" class="w-100">* Você esta no Painel de Controle</p>
-                            <p class="w-100">Conta: <a style="color: rgb(5, 5, 254);"><%=nivelUsuario%></a></p>
-                            <p class="w-100">Usuarios Conectados: <span id="userOn" style="color: rgb(0, 169, 11);">0</span></p>
-                        </div>
-                 
-                    </div>
+        <div class='dashboard-app' id="conteudo" style="height: 100%;">       
+            <div class="card-m">
+                <div class="card-header">
+                    <h2>Estatisticas</h2>
                 </div>
+                <div class="card-body">
+                <p class="w-100">Usuarios Conectados: <span id="userOn" style="color: rgb(0, 169, 11);">0</span></p>
+                
+                <hr>
+
+                  <div>
+                    <canvas id="myChart"></canvas>
+                  </div>
+                  
             </div>
+        </div>
             </div>
             <div id="resize" style="position: initial;"></div>
             </div>
         </div>
-
     </div>
- 
 </main>
-
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
     const socket = io();
@@ -106,5 +104,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="js/dashboard.js"></script>
-<%- include('include/footer.ejs')%>
+<script type="text/javascript" src="js/estastistica.js"></script>
+<%- include('../include/footer.ejs')%>
