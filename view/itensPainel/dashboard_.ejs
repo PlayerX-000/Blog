@@ -15,13 +15,13 @@
                     <div class="col-md-6"><label class="labels">Titulo</label><input name="CardTituloPost" id="TituloCard" type="text" class="form-control" placeholder="Titulo do Post" value="" required></div>
                     <div class="col-md-6"><label class="labels">Subtitulo</label><input name="CardSubtituloPost" id="SubtituloCard" type="text" class="form-control" value="" placeholder="Subtitulo do Card" required></div>
                     <div class="col-md-6"><label class="labels">Conteudo</label><input name="CardTextoPost" id="ConteudoCard" type="text" class="form-control" placeholder="Conteudo do Card" value="" required></div>
-                    <div class="col-md-6"><button type="button" style="margin-top: 6%;" href="#" id="selectImg" class="btn btn-info">selecionar img</button><input name="CardImgPost" id="img" style="display: none;" accept="image/*" type="file" class="form-control" placeholder="img" required></div>
+                    <div class="col-md-6"><button type="button" style="margin-top: 6%;" id="selectImg" class="btn btn-info">selecionar img</button><input name="CardImgPost" id="img" style="display: none;" accept="image/png,image/jpeg,image/jpg" type="file" class="form-control" placeholder="img" required></div>
                 </div>
             </div>
             </div>
               <div class="cards centraliza" style="height: -webkit-fill-available;">
                 <div class="centraliza">
-                  <img id="imagemCardVisu" class="d-block" style="width: 90%;" src="img/imgteste.jpeg" alt="">
+                  <img id="imagemCardVisu" class="d-block" style="width: 90%;" src="<%=urlImgPost%>" alt="">
                 </div>
                 <div class="centraliza" style="width: -webkit-fill-available;">
                 <h3  id="tituloVisu" style="text-align: center; width: inherit;margin: 0;"></h3>
@@ -69,7 +69,7 @@
                                 <div class="col-lg-6" style="padding: 0 !important;padding-top: 6% !important;padding-bottom: 6% !important;">
                                     <label class="labels titulo">Categoria do post</label>
                                     <!-- Multiselect dropdown -->
-                                    <select id="CategoriaPost" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
+                                    <select id="CategoriaPost" data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
                                         <% if (categorias.length > 0){ %>
                                                       <% for (let categoria of categorias){ %>
                                                         <option id="<%=categoria.id%>"><%=categoria.nome%></option>
@@ -97,7 +97,7 @@
                             <label class="labels titulo">Texto 1</label>
                             <textarea name="TextoPostConteudo" id="texto1PostOFC" type="text" style="height: 80% !important;" class="form-control" placeholder="Texto" value="" required></textarea>
                         </div>
-                    <button type="button" style="margin-top: 6%;" href="#" id="selectImgPost" class="btn btn-info">selecionar img</button><input name="ImgPostConteudo" id="imgPost" style="display: none;" accept="image/*" type="file" class="form-control" placeholder="img">
+                    <button type="button" style="margin-top: 6%;" id="selectImgPost" class="btn btn-info">selecionar img</button><input name="ImgPostConteudo" id="imgPost" style="display: none;" multiple="true" accept="image/png,image/jpeg,image/jpg" type="file" class="form-control" placeholder="img">
                     </div>
 </div>
 
@@ -114,23 +114,16 @@
                  <div class="collapse navbar-collapse justify-content-space-between" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                      <a class="nav-link" aria-current="page" href="#">Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" >Categorias</a>
                   </li> 
-                    <li>
-                    <a class="nav-link" aria-current="page" href="#">Contato</a>
-                  </li>
                   <li>
                     <a class="nav-link" aria-current="page" href="/login">Login</a>
                   </li>
                   </ul>
                   <div class="menuSS">
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-secondary" type="button">Search</button>
-                  </form>
                 </div>
                 </div>
               </div>
@@ -157,7 +150,7 @@
                         </div>
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img id="imgPostEx" style="width: 100%;" class="img-fluid rounded" src="<%=urlImgPost%>" alt="..." /></figure>
+                    <figure class="mb-4"><img id="imgPostEx" style="width: 100%;" class="img-fluid rounded" src="<%=urlImgBanner%>" alt="..." /></figure>
                     <!-- Post content-->
                     <section class="centraliza mb-5">
                         <p id="texto1Post" class="fs-5 mb-4"></p>
@@ -171,7 +164,7 @@
                 <div class="card mb-4">
                     <div class="card-header">Relacionados</div>
                     <div class="centraliza">
-                    <figure class="mb-4"><img style="width: auto;" class="img-fluid rounded" src="img/corroselOfc.jpeg" alt="..." /></figure>
+                    <figure class="mb-4"><img id="ExemploPostRelacionado" style="width: auto;" class="img-fluid rounded" src="<%=urlImgPostRelacionado%>" alt="..." /></figure>
                     <div class="card-body">descrição do produto relacionado, cards pode ser exibidos aqui</div>
                     <a href="#" class="w-25 btn btn-secondary btn-sm">Ver</a>
                     </div>

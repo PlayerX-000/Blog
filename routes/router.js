@@ -63,7 +63,7 @@ router.post("/pesquisa", pages.pesquisaBuscar)
 
 router.post("/painel",validacao.validaUsuario, jwt.criaToken, pages.painel)
 
-router.post("/CriaPostagem",jwt.verificaToken,multer.upload.array("card",2),pageDados.criaPostagem)
+router.post("/CriaPostagem",jwt.verificaToken,multer.upload.array("card",10),pageDados.criaPostagem,(req,res)=>{res.status(200).end()})
 
 router.post("/CriaCategoria",jwt.verificaToken,async(req,res)=>{
 const resultadoCriacaoCategoria = await sql.createCategoria(req.body.nome)

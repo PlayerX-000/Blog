@@ -110,7 +110,6 @@ exports.getPostagem = async(id) => {
             id
           }
          });
-        
 const postagem = postagemArr[0]
 
        const relacionado = await Postagem.findAll({
@@ -118,9 +117,10 @@ const postagem = postagemArr[0]
           categoria: postagem.categoria
         }
        })
-       const tamanhoRelacionandos = relacionado.length
-       const relacionadoEscolhido = Math.floor(Math.random()*tamanhoRelacionandos);
-       return relacionado[relacionadoEscolhido]
+       for(let a=0;a<relacionado.length;a++){
+        if(relacionado[a].id==id)relacionado.splice(a,1)
+       }
+       return relacionado
     } catch (error) {
         throw error;
       };
@@ -266,9 +266,11 @@ exports.AlteraRankPosts=async(update,where)=>{
     throw error
   }
 };
-exports.GetRankPosts=async(regra={where:{ano:`${anoAtual}`}})=>{
+exports.GetRankPosts=async(regra={where:{ano:anoAtual}})=>{
   try {
-    return await RankPost.findOne(regra)
+    
+    const posts = await RankPost.findAll(regra)
+    return posts
   } catch (error) {
     throw error
   }

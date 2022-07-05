@@ -74,7 +74,7 @@ const Postagens = database.define("postagens",{
    },
    img_url_pagina_post: {
     allowNull: false,
-    type: Sequelize.TEXT("long")
+    type: Sequelize.TEXT
    
    },
    favorito:{

@@ -30,14 +30,8 @@
           <li class="nav-item">
             <a class="opcNav nav-link link" id="categria-tab" href="/categorias">Categorias</a>
           </li>
-          <li class="nav-item">
-            <a class="opcNav nav-link link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Contato</a>
-          </li>
         </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">CAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
         </div>
-    </div>
   </div>
   <!--Menu antes do colappso-->
       <div class="pos-f-t">
@@ -55,16 +49,13 @@
               <li class="nav-item dropdown">
                 <a class="nav-link" href="/categorias">Categorias</a>
             </li> 
-              <li>
-              <a class="nav-link" aria-current="page" href="#">Contato</a>
-            </li>
             <li>
               <a class="nav-link" aria-current="page" href="/login">Login</a>
             </li>
             </ul>
             <div class="menuSS">
             <form class="d-flex" action="/pesquisa" method="post">
-              <input style="background-color: white !important;" name="valorPesquisa" class="form-control me-2" type="search" placeholder="" aria-label="Search">
+              <input style="background-color: white !important;" name="valorPesquisa" class="form-control me-2" type="search" placeholder="O que você precisa?" aria-label="Search">
               <button class="btn btn-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
           </div>
@@ -124,7 +115,7 @@
 <div class="buscaMin w-100">
   <div class="card-m borda bg-dark" style="width: 100%;border-radius: 4px;">
     <form class="d-flex" style="justify-content: center;background-color: #262626;" action="/pesquisa" method="post">
-      <input style="background-color: white !important;" name="valorPesquisa" class="seg-plano w-100 form-control" type="search" placeholder="" aria-label="Search">
+      <input style="background-color: white !important;" name="valorPesquisa" class="seg-plano w-100 form-control" type="search" placeholder="O que você precisa?" aria-label="Search">
       <button class="btn btn-secondary seg-plano" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
 </div>
@@ -194,7 +185,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Termo de Responsabilidade</h5>
       </div>
-      <div class="modal-body" style="overflow: auto;height: 20em;font-size: clamp(1em, 1em + 1vw, 1em); text-align: justify; -webkit-text-stroke-width: thin;">
+      <div class="modal-body" style="overflow: auto;height: 15em;font-size: clamp(1em, 1em + 1vw, 1em); text-align: justify; -webkit-text-stroke-width: thin;">
         Todas as dicas e conceitos apresentados neste blog têm como objetivo apenas informa, educar, e indicar produtos seguros. Este blog foi disponibilizado com esse objetivo , e não tem intenção nenhuma de servir como orientação médica, prescrição ou substituir diagnóstico de profissionais. Nenhuma informação e dicas deste blog substitui uma consulta com o seu médico, nutricionista ou personal . O propósito do blog é apenas ajudar a complementar sua saúde e Bem-Estar com dicas de produtos para saude com base em estudos. Somente um médico poderá avaliar e  dizer se você está apto ou não a estas alterações. Tenha em mente que os resultados aqui apresentados são de pessoa reais ,mas não garante que você terá o mesmo resultado , isso varia de organismo para organismo e claro, dedicação e disciplina também conta.
       </div>
       <div class="modal-footer">
@@ -218,14 +209,14 @@
 <button type="button" id="conteudoFormAbrir" class="btn btn-secondary float-left">Receber</button>
 </section>
 </div>
-<% if (posts.length > 0){ %>
+<% if (postsFav.length > 0){ %>
 <section class="section-index">
   <h2 class="text-dark">Destaques</h2>
   <hr/>
-  <article class="article-index">
 
+  <article class="article-index">
       <div class="containerr" style="background: #ffffff59;">
-          <% for (let post of posts){ %>
+          <% for (let post of postsFav){ %>
         <div class="cards centraliza" style="height: auto;">
           <div class="centraliza">
             <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
@@ -240,6 +231,29 @@
         <% }}%>
       </div>
   </article>
+
+
+  <% if (postsAll.length > 0){ %>
+      <h2 class="text-dark">Outros Posts</h2>
+      <hr/>
+  <article class="article-index">
+    <div class="containerr" style="background: #ebebeb80;">
+        <% for (let post of postsAll){ %>
+      <div class="cards centraliza" style="height: auto;">
+        <div class="centraliza">
+          <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
+        </div>
+        <div class="centraliza">
+        <h3 style="margin: 0;"><%=post.card_titulo%></h3>
+        <small class="text-secondary"><%=post.card_subtitulo%></small>
+        <p style="text-align: center;"><%=post.card_texto%></p>
+           <a href="/post/<%=post.id%>" onclick="censo('<%=post.id%>')" class="btn btn-secondary btn-sm">Ler Mais</a>
+       </div> 
+      </div>
+      <% }}%>
+    </div>
+</article>
+  
 </section>
 </main>
 

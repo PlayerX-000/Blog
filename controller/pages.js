@@ -3,12 +3,15 @@ const variaveis = require("../bd/variaveis")
 const vars = variaveis.vars();
 
 exports.initial = async(req, res) => { 
-      const regra = {where:{favorito:true}}
-      const Posts = await sql.getAllPostagem(regra)
+      const regraFav = {where:{favorito:true}}
+      const regraAll = {where:{favorito:false}}
+      const PostsFav = await sql.getAllPostagem(regraFav)
+      const PostsAll = await sql.getAllPostagem(regraAll)
       res.render("../view/index.ejs",{
             marca:vars.marca,
             titulo:vars.titulo.index,
-            posts: Posts
+            postsFav: PostsFav,
+            postsAll: PostsAll
       })
    }
 
@@ -20,7 +23,13 @@ exports.login = (req, res) => {
 }
 
 exports.painel = async(req, res) => { 
-      const regra = {};
+      const { email , senha } = req.body
+      const regra = {
+            where:{
+                  email,
+                  senha
+            }
+      };
       
       const usuarioArr = await sql.getUsuarioDados(regra);
       const usuario = usuarioArr[0]
@@ -34,10 +43,12 @@ exports.painel = async(req, res) => {
 
 exports.post = async(req, res) => { 
       const id = req.params.id;
-      const relacionado = await sql.getPostagemPorCategoria(id);    
+      const relacionados = await sql.getPostagemPorCategoria(id);    
       const response = await sql.getPostagem(id);
       const Post = response[0]
       const tags = Post.tag_pagina_post.split(",")
+      const ImgPost = Post.img_url_pagina_post.split(",")
+
       res.render("../view/post.ejs",{
             keywords: Post.palavra_chave_post_seo,
             marca:vars.marca,
@@ -50,9 +61,8 @@ exports.post = async(req, res) => {
             donoPost: Post.autor_pagina_post,
             tagPost: tags,
             paragrafo1Post: Post.texto_pagina_post,
-            urlImgPost: Post.img_url_pagina_post,
-            relacionado: relacionado
-
+            relacionados,
+            ImgPost
       })
 }
 
@@ -92,7 +102,9 @@ exports.dashboardItem = async(req, res) => {
       const quantidadePosts = await sql.getAllPostagem()
       res.render("../view/itensPainel/dashboard_.ejs",{
             IDdeCRIACAO:quantidadePosts.length,
-            urlImgPost: vars.imgCard.teste,
+            urlImgPost: vars.CriacaoExemplo.Card,
+            urlImgBanner:vars.CriacaoExemplo.Banner,
+            urlImgPostRelacionado:vars.CriacaoExemplo.PostRelacionado,
             categorias
       })
 }

@@ -3,7 +3,6 @@ const updateStatistica = require("./estatistica_socket")
 let usuarios = 0
 
 exports.estatisticas=async(dataArr)=>{
-console.log("ESTATISTICA ENTROU")
 const whereLocalidade = {
     where:{
         cidade:dataArr.cidade,
@@ -82,7 +81,6 @@ if(!EstatisticaBD){
 
 
 exports.rank_post=async(dataArr,idPost)=>{
-console.log("WHERE LOCALIDADE FEITO")
     const whereLocalidade = {
         where:{
             cidade:dataArr.cidade,
@@ -90,17 +88,14 @@ console.log("WHERE LOCALIDADE FEITO")
             estado:dataArr.estado
         }
     };
-    console.log("PEGA LOCALIDADE")
     const localBD = await sql.GetLocalidade(whereLocalidade);
     if(!localBD){
-        console.log("LOCALIDADE NAO EXISTE")
         this.local({
             cidade:dataArr.cidade,
             pais:dataArr.pais,
             estado:dataArr.estado
     }).then(async(res)=>{
         if(res){
-            console.log("LOCALIDADE CRIADA")
     const localBDbrt = await sql.GetLocalidade(whereLocalidade) 
     const localBD2 = localBDbrt.dataValues
 
@@ -120,22 +115,15 @@ console.log("WHERE LOCALIDADE FEITO")
             ano:dataArr.ano,
             local_id: localBD2.id
     }
-    console.log("PEGA RANKPOST")
     const rankPostBD = await sql.GetRankPosts(whereRankPost);
-    if(!rankPostBD){
-        console.log("RANK POST NAO EXISTE")
+    if(!rankPostBD[0]){
         await sql.CriaRankPosts(cria_rankPost)
-        console.log("RANK POST CRIADO")
     }else{
-        console.log("ATUALIZANDO RANK POST")
-        const acessosUpdate = (rankPostBD.acessos)+1
+        const acessosUpdate = (rankPostBD[0].acessos)+1
         await sql.AlteraRankPosts({acessos:acessosUpdate},whereRankPost) 
-        console.log("ATUALIZADO")
     };
     };});}else{
-        console.log("LOCALIDADE EXISTE")
         const localBDbrt = await sql.GetLocalidade(whereLocalidade) 
-        console.log("PEGOU LOCALIDADE")
         const localBD = localBDbrt.dataValues
         const whereRankPost = {
             where:{
@@ -153,16 +141,13 @@ console.log("WHERE LOCALIDADE FEITO")
             ano:dataArr.ano,
             local_id: localBD.id
     }
-    console.log("PEGANDO RANK POST")
         const rankPostBD = await sql.GetRankPosts(whereRankPost);
-        if(!rankPostBD){
-            console.log("RANK POST NAO EXISTE")
+        if(!rankPostBD[0]){
             await sql.CriaRankPosts(cria_rankPost)
-            console.log("CRIADO")
         }else{
-            const acessosUpdate = (rankPostBD.acessos)+1
+            const acessosUpdate = (rankPostBD[0].acessos)+1
+
             await sql.AlteraRankPosts({acessos:acessosUpdate},whereRankPost) 
-            console.log("RANK POST ATUALIZADO")
         };
     };
 };

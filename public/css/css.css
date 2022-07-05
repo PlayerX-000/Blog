@@ -1199,3 +1199,43 @@ div#filtraPosts.card-m {
     background-color: transparent;
     color: rgb(227, 0, 0);
 }
+
+.BotaoComprar {
+    display: inline-block;
+    border-radius: 5px;
+    background-image: linear-gradient(179deg,#000000f5,#0037ffcc);
+    color: beige;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    width: auto;
+    cursor: pointer;
+}
+
+.BotaoComprar:hover{
+    display: inline-block;
+    border-radius: 5px;
+    background-image: linear-gradient(179deg,#080202f5,#2a58ff);
+    text-decoration: none; 
+    color: beige;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    width: auto;
+    cursor: pointer;
+}
+
+@media screen and (min-width:0px) and (max-width:450px){
+.cardConfig {
+    width: calc(48% + (73 - 48) * ((100vw - 400px) / (2600 - 400))) !important;
+}
+}
+@media screen and (min-width:450px) and (max-width:2800px){
+.cardConfig {
+    width: calc(28% + (53 - 28) * ((100vw - 400px) / (2600 - 400))) !important
+}
+}

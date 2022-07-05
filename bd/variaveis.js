@@ -23,8 +23,10 @@ titulo: {
     painel:"Blog | Painel"
 },
 
-imgCard: {
-    teste:"img/cadastrar_email.jpeg"
+CriacaoExemplo: {
+    Card:"img/ExemploCardCriacao.png",
+    Banner:"img/ExemploBannerCriacao.jpeg",
+    PostRelacionado:"img/ExemploBannerRelacionadosCriacao.jpeg"
 }    
 };
 };

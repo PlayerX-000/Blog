@@ -1,11 +1,13 @@
 /*
 VARIAVEIS
 */
-const myModalFormulario = new bootstrap.Modal(document.getElementById('formReceberConteudo'), {
+let myModalFormulario 
+let Termo
+if(window.location.pathname == "/")myModalFormulario = new bootstrap.Modal(document.getElementById('formReceberConteudo'), {
   keyboard: false
 })
 
-const Termo = new bootstrap.Modal(document.getElementById('TermoDeResponsabilidade'), {
+if(window.location.pathname == "/")Termo = new bootstrap.Modal(document.getElementById('TermoDeResponsabilidade'), {
   keyboard: false
 })
 /*
@@ -13,8 +15,9 @@ SCRIPT
 */
 
 $('.carousel').carousel({
-    interval: 5500
+    interval: 4500
   })
+
 
 $('#exampleModal').on('show.bs.modal', function (event) {
   var modal = $(this)

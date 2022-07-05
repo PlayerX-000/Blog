@@ -29,8 +29,12 @@ $.ajax({
     url: "/logoutItem",
     method: "POST",
 success: function(res){
+  socket.disconnect()
+  socket.close()
+  socket.destroy()
 const pag = document.querySelector("html");
-pag.innerHTML = res
+pag.innerHTML = res;
+$("title")[0].innerText = "Login"
 }
 })
 })
@@ -42,6 +46,9 @@ $("#perfilItem").click(()=>{
         url: "/perfilItem",
         method: "GET",
     success: function(res){
+      socket.disconnect()
+      socket.close()
+      socket.destroy()
     const pag = document.getElementById("conteudo");
     pag.innerHTML = res
     }
@@ -55,12 +62,16 @@ $("#configuracoesItem").click(()=>{
       url: "/configuracoesItem",
       method: "GET",
   success: function(res){
-
+    socket.disconnect()
+    socket.close()
+    socket.destroy()
 //adiciona conteudo na pagina
   const pag = document.getElementById("conteudo");
   pag.innerHTML = res;
 //exclui categoria/DASHBOARD/CONFIGURAÇOES
-$("#ExcluiCategoria").click((dad)=>{
+$("#ExcluiCategoria").click(()=>{
+  const ExcluiCategoria = $("#ExcluiCategoria")
+  ExcluiCategoria.css('pointer-events','none');
   const idCategoria = Number($("#CategoriaPost option:selected")[0].id)
   $.ajax({
     url: "/ExcluiCategoria",
@@ -79,20 +90,22 @@ document.getElementById("Texto_Mensagem").innerText = `Categoria ${opcaoSelecion
   }); 
   MensagemPerson.show();
     }
-    dad.prop('disabled', false);
+    ExcluiCategoria.css('pointer-events','all');
   }
   })
-  dad.prop('disabled', true);
+
 })
 //Adicionar categoria/DASHBOARD/CONFIGURAÇOES
 $("#CriarCategoria").click(()=>{
+  const CriarCategoria = $("#CriarCategoria")
+  CriarCategoria.css('pointer-events','none');
 
   const PopUpCriacaoCategoria = new bootstrap.Modal(document.getElementById('CriaCategoria'), {
     keyboard: false
   });
   PopUpCriacaoCategoria.show();
 
-  $("#criaCategoriaAjax").click((dad)=>{
+  $("#criaCategoriaAjax").click(()=>{
     const nomeFormConteudo = document.getElementById("nomeDaCategoriaInvalidoLabel");
     const nomeCategoriaStatus = window.getComputedStyle(nomeFormConteudo, null).display;
 if(nomeCategoriaStatus=='none'){
@@ -119,10 +132,8 @@ document.getElementById("Texto_Mensagem").innerText = `Categoria ${nomeCategoria
     MensagemPerson.show();
   },400)
   },100)
-  dad.prop('disabled', false);
 }
 })
-dad.prop('disabled', true);
 }
 });
 })
@@ -153,6 +164,7 @@ const seccFav = document.getElementById("postsFavoritos")
   const naoFavoritoClass = (elemento.childNodes[1].childNodes[1].className).replace("cardFavorito-true","")
   elemento.childNodes[1].childNodes[1].className = naoFavoritoClass
  }
+ CriarCategoria.css('pointer-events','all');
 }
 })
 }else if(funcao=="delpos"){
@@ -180,7 +192,9 @@ $("#dashboardItem").click(()=>{
             url: "/dashboardItem",
             method: "GET",
         success: function(res){
-
+          socket.disconnect()
+          socket.close()
+          socket.destroy()
 //adiciona conteudo na pagina
         const pag = document.getElementById("conteudo");
         pag.innerHTML = res;
@@ -221,31 +235,26 @@ document.getElementById("EXEMPLOdata").innerText = `Postado ${getData()}`
             document.getElementById("textoVisu").innerHTML = TituloCard;
           });
 
-          $("#selectImg").click(()=>{
-            
-            const fileElem = document.getElementById("img")
-            const fileSelect = document.getElementById("selectImg")
-            const imgCard = document.getElementById("imagemCardVisu")
-            
-            fileSelect.addEventListener("click", function (e) {
-              if (fileElem) {
-                fileElem.click();
-              }
-              e.preventDefault(); // prevent navigation to "#"
-            }, false);
-            
-            
-            fileElem.addEventListener("change", handleFiles, false);
-            
-            function handleFiles() {
-                  const url = URL.createObjectURL(this.files[0]);
-              const inf = this.files[0].name + ": " + this.files[0].size + " bytes";
-            imgCard.src = url
+          const fileElem = document.getElementById("img")
+          const fileSelect = document.getElementById("selectImg")
+          const imgCard = document.getElementById("imagemCardVisu")
+          
+          fileSelect.addEventListener("click", function (e) {
+            if (fileElem) {
+              fileElem.click();
             }
-            
-  
-//visualização do post 
-          })
+            e.preventDefault(); // prevent navigation to "#"
+          }, false);
+          
+          
+          fileElem.addEventListener("change", handleFiles, false);
+          
+          function handleFiles() {
+                const url = URL.createObjectURL(this.files[0]);
+            const inf = this.files[0].name + ": " + this.files[0].size + " bytes";
+          imgCard.src = url
+          }
+
           $("#tituloPostOFC").keyup(function() {
             const TituloPos = $("#tituloPostOFC").val();
             document.getElementById("tituloPost").innerHTML = TituloPos;
@@ -257,29 +266,28 @@ document.getElementById("EXEMPLOdata").innerText = `Postado ${getData()}`
 
 
 
-          $("#selectImgPost").click(()=>{
-            
-            const fileElem2 = document.getElementById("imgPost")
-            const fileSelect2 = document.getElementById("selectImgPost")
-            const imgCard2 = document.getElementById("imgPostEx")
-            
-            fileSelect2.addEventListener("click", function (e) {
-              if (fileElem2) {
-                fileElem2.click();
-              }
-              e.preventDefault(); // prevent navigation to "#"
-            }, false);
-            
-            
-            fileElem2.addEventListener("change", handleFiles2, false);
-            
-            function handleFiles2() {
-                  const url = URL.createObjectURL(this.files[0]);
-              const inf = this.files[0].name + ": " + this.files[0].size + " bytes";
-            imgCard2.src = url
+          const fileElem2 = document.getElementById("imgPost")
+          const fileSelect2 = document.getElementById("selectImgPost")
+          const imgCard2 = document.getElementById("imgPostEx")
+          
+          fileSelect2.addEventListener("click", function (e) {
+            if (fileElem2) {
+              fileElem2.click();
             }
-          })
-          $("#CriaPostViaAjax").click((dad)=>{
+            e.preventDefault(); // prevent navigation to "#"
+          }, false);
+          
+          
+          fileElem2.addEventListener("change", handleFiles2, false);
+          
+          function handleFiles2() {
+                const url = URL.createObjectURL(this.files[0]);
+          console.log(this.files[0].name + ": " + this.files[0].size + " bytes");
+          imgCard2.src = url
+          }
+
+          
+          $("#CriaPostViaAjax").click(()=>{
 
           const inputText = $("input[type=text]").filter(function() {
               return !this.value;
@@ -289,9 +297,6 @@ document.getElementById("EXEMPLOdata").innerText = `Postado ${getData()}`
             return !this.value;
         }).get();
 
-          const inputFile = $("input[type=file]").filter(function() {
-              return !this.value;
-          }).get();
 
 const formData = new FormData();
 
@@ -309,7 +314,7 @@ const LinkAfiliadoPostConteudo = document.getElementsByName("LinkAfiliadoPostCon
 const TituloPostConteudo = document.getElementsByName("TituloPostConteudo")
 const TextoPostConteudo = document.getElementsByName("TextoPostConteudo")
 const ImgPostConteudo = document.getElementsByName("ImgPostConteudo")
-
+const InputIMGS = $("input[name=ImgPostConteudo]")[0].files
 
 let Message = "";
 if (inputText.length || textArea.length) Message = "* Preencha todos os campos \n";
@@ -317,10 +322,18 @@ if(!CardImgPost[0].files[0]) Message += "* Insira uma Imagem para o Card da Post
 if(!ImgPostConteudo[0].files[0]) Message += "* Insira uma Imagem para a Postagem \n";
 if(Message!=="")return alert(Message);
 
+const CriaPostViaAjax = $("#CriaPostViaAjax")
+CriaPostViaAjax.css('pointer-events','none');
 
 if(CardImgPost[0].files[0])formData.append('card', CardImgPost[0].files[0],`CARD${idCriacao}.${CardImgPost[0].files[0].type.split("/")[1]}`); 
 
-if(ImgPostConteudo[0].files[0])formData.append('card', ImgPostConteudo[0].files[0],`POST${idCriacao}.${ImgPostConteudo[0].files[0].type.split("/")[1]}`); 
+for(let a=0;a<InputIMGS.length;a++){
+formData.append('card', 
+InputIMGS[a],
+`POST${idCriacao}${a}.${InputIMGS[a].type.split("/")[1]}`
+);
+}
+console.log(formData)
 const idCategoria = Number($("#CategoriaPost option:selected")[0].id)
 formData.append('CardTituloPost', CardTituloPost[0].value); 
 formData.append('IdPost', idCriacao); 
@@ -345,13 +358,30 @@ $.ajax({
     contentType: false,
     processData: false,
     success: function(){
-      dad.prop('disabled', false);
      (()=>{
-      document.location.reload(true);
+       $("#imgPost").val("");
+       $("#img").val("");
+       $("#imgPostEx")[0].src = "img/ExemploBannerCriacao.jpeg"
+       $("#imagemCardVisu")[0].src = "img/ExemploCardCriacao.png"
+       $("#ExemploPostRelacionado")[0].src = "img/ExemploBannerRelacionadosCriacao.jpeg"
+       $("#CategoriaPost").val("")
+       CardTituloPost[0].value = ""
+       CardSubtituloPost[0].value = ""
+       CardTextoPost[0].value = ""
+       CardImgPost[0].value = ""
+       PalavraChavePostSEO[0].value = ""
+       TituloPostSEO[0].value = ""
+       DescricaoPostSEO[0].value = ""
+       TagsPostConteudo[0].value = ""
+       AutorPostConteudo[0].value = ""
+       LinkAfiliadoPostConteudo[0].value = ""
+       TituloPostConteudo[0].value = ""
+       TextoPostConteudo[0].value = ""
+       ImgPostConteudo[0].value = ""
+CriaPostViaAjax.css('pointer-events','all');
      })()
     }
   })
-  dad.prop('disabled', true);
           })
 
 

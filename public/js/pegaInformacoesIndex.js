@@ -17,9 +17,14 @@ $.getJSON(`http://ip-api.com/json/${IP}`,function(dados){
         pais:dados.country
     };
         const acessoAnterior = localStorage.getItem(`Acesso:${data}`);
+        const aceitacaoTermo = localStorage.getItem("TERMODERESPONSABILIDADE394712-3471320")
         if(acessoAnterior!==null) return;
-        localStorage.setItem(`Acesso:${data}`,true);
-        socket.emit("index",dataArr);
+if(aceitacaoTermo){
+    localStorage.clear()
+    localStorage.setItem("TERMODERESPONSABILIDADE394712-3471320",true)
+}
+    localStorage.setItem(`Acesso:${data}`,true);
+    socket.emit("index",dataArr);
 });
 });
 

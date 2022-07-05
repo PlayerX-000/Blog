@@ -31,13 +31,7 @@
             <li class="nav-item">
               <a class="opcNav nav-link link" id="categria-tab" href="/categorias">Categorias</a>
             </li>
-            <li class="nav-item">
-              <a class="opcNav nav-link link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Contato</a>
-            </li>
           </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">CAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
-          </div>
       </div>
     </div>
     <!--Menu antes do colappso-->
@@ -56,16 +50,13 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link" href="/categorias">Categorias</a>
               </li> 
-                <li>
-                <a class="nav-link" aria-current="page" href="#">Contato</a>
-              </li>
               <li>
                 <a class="nav-link" aria-current="page" href="/login">Login</a>
               </li>
               </ul>
               <div class="menuSS">
               <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="O que você precisa?" aria-label="Search">
                 <button class="btn btn-secondary seg-plano" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
               </form>
             </div>
@@ -75,7 +66,7 @@
         </div>
   </header>
     <!-- Page content-->
-    <div class="container mt-5">
+    <div style="max-width: 100%;">
         <div class="row">
             <div class="col-lg-8">
                 <!-- Post content-->
@@ -88,28 +79,58 @@
                         <div class="text-muted fst-italic mb-2">Postado <%=dataPost%> por <%=donoPost%></div>
                         <!-- Post categories-->
                         <% if (tagPost.length > 0){ %>
-                          <% for (let tag of tagPost){ %>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%=tag%></a>
+                          <% for (let a=0;a < tagPost.length;a++){ %>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%=tagPost[a]%></a>
                             <% }}%>
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img style="width: 100%;" class="img-fluid rounded" src="<%=urlImgPost%>" alt="..." /></figure>
+                      <div id="corouselPost" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <% if (ImgPost.length > 0){ %>
+                          <% for (let a=0;a < ImgPost.length;a++){ %>
+                            <% if (a==0){ %>
+                        <li data-target="#corouselPost" data-slide-to="<%=a%>" class="active"></li>
+                        <% }else{ %>
+                        <li data-target="#corouselPost" data-slide-to="<%=a%>"></li>
+                       <% }}} %>
+                      </ol>
+                      <div class="carousel-inner">
+                        <% if (ImgPost.length > 0){ %>
+                          <% for (let a=0;a < ImgPost.length;a++){ %>
+                            <% if (ImgPost[a]!=""){ %>                           
+                            <% if (a==0){ %>
+                        <div class="carousel-item active">
+                          <figure class="mb-4"><img style="width: 100%;" class="img-fluid rounded" src="<%=ImgPost[a]%>" alt="First slide 960x330" /></figure>
+                        </div>
+                       <% }else{ %>
+                        <div class="carousel-item">
+                          <figure class="mb-4"><img style="width: 100%;" class="img-fluid rounded" src="<%=ImgPost[a]%>" alt="First slide 960x330" /></figure>
+                        </div>
+                       <% }}}} %>
+                      </div>
+                    </div>
+                   
                     <!-- Post content-->
                     <section class="centraliza mb-5">
                         <p class="fs-5 mb-4"><%=paragrafo1Post%></p>
-                        <a href="<%=linkProduto%>" class="w-25 btn btn-primary btn-sm">Comprar</a>
+                        <a class="BotaoComprar" href="<%=linkProduto%>">Comprar</a>
                     </section>
                 </article>
             </div>
+            <% if (relacionados.length > 0){ %>
             <!-- Side widgets-->
-            <div class="col-lg-4">
+            <div class="col-lg-4" style="margin-top: 5%;text-align: center;">
                 <!-- Side widget-->
                 <div class="card mb-4">
                     <div class="card-header">Relacionados</div>
-                    <div class="centraliza">
+                    <div class="container" style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center;">
+                    <% for(relacionado of relacionados){ %>
+                    <div class="borda" style="background-color: #d9d6ef; width: 80%; align-items: center; text-align: center;">
                     <figure class="mb-4"><img style="width: auto;" class="img-fluid rounded" src="<%=relacionado.card_img_url%>" alt="..." /></figure>
                     <div class="card-body"><%=relacionado.card_texto%></div>
-                    <a href="/post/<%=relacionado.id%>" class="w-25 btn btn-secondary btn-sm">Ver</a>
+                    <a href="/post/<%=relacionado.id%>" class="btn btn-sm" style="color:wheat; background-color: #2014dbd1;" >Ver</a>
+                    </div>
+                    <% }} %>
                     </div>
                   </div>
             </div>
