@@ -16,6 +16,7 @@ exports.criaToken = (req,res,next) => {
     path: "/",
     secure: true
 });
+req.email = email
     next();
     } catch (error) {
         throw error;
@@ -29,11 +30,14 @@ if(!token){
     return RedirecionaPaginaLogin(res)
 };
 try {
-jwt.verify(token,vars.jwt.segredo);
+jwt.verify(token,vars.jwt.segredo,function(err, decoded){
+    if (err) return res.status(500).end();
+    req.email = decoded.email
+});
 next()
 } catch (error) {
     limpaCookieFuncao(res)
-    RedirecionaPaginaLogin(res)
+   return RedirecionaPaginaLogin(res)
 };
 };
 

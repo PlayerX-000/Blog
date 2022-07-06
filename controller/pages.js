@@ -23,16 +23,17 @@ exports.login = (req, res) => {
 }
 
 exports.painel = async(req, res) => { 
-      const { email , senha } = req.body
-      const regra = {
+      const email = req.email
+      let regra = {}
+      if(email)regra = {
             where:{
-                  email,
-                  senha
+                  email
             }
       };
-      
+      console.log(regra)
       const usuarioArr = await sql.getUsuarioDados(regra);
       const usuario = usuarioArr[0]
+      console.log(usuario)
       res.render("../view/dashboard.ejs",{
             marca:vars.marca,
             titulo:vars.titulo.login,
