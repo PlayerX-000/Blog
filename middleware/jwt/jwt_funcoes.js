@@ -53,6 +53,6 @@ function limpaCookieFuncao(res) {
 function RedirecionaPaginaLogin(res){
         res.status(200).render("../view/login.ejs",{
         marca:vars.marca,
-        titulo:vars.titulo
+        titulo:vars.titulo.login
     });
 }

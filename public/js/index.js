@@ -97,3 +97,7 @@ $("#TermoCheck").click(()=>{
 },1000)
 }
 })
+
+$('#backToTop').click(()=>{
+  $('html, body').animate({scrollTop:0}, 'slow');
+});

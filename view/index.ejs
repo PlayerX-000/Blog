@@ -2,6 +2,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-BR">
 <head>
+  <%- include('include/logoFavicon.ejs')%>
     <meta http-equiv="content-language" content="pt-br">
     <meta name="author" content="kauan.mghenrique@gmail.com">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -106,7 +107,7 @@
 </div>
 
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb color-cinza">
+  <ol class="breadcrumb breadcrumb-index">
     <li class="breadcrumb-item active" aria-current="page">Inicio</li>
     <li class="breadcrumb-item active" aria-current="page"></li>
   </ol>
@@ -201,23 +202,23 @@
 </div>
 
 <div class="width-100 centraliza">
-<section class="border box-text">
+<section class=" box-text">
   <h1 class="font-weight-bold">Seja Bem-Vindo</h1>
   <article>
-  <p class="text-justify text-center font-italic">Interessado em receber produtos por e-mail e ficar por dentro das novidades?</p>
+  <p style="color:rgb(74 74 74)" class="text-justify text-center font-italic">Interessado em receber produtos por e-mail e ficar por dentro das novidades?</p>
 </article>
-<button type="button" id="conteudoFormAbrir" class="btn btn-secondary float-left">Receber</button>
+<button type="button" id="conteudoFormAbrir" class="btn-Cadastro-user float-left">Receber</button>
 </section>
 </div>
 <% if (postsFav.length > 0){ %>
 <section class="section-index">
-  <h2 class="text-dark">Destaques</h2>
+  <h2 class="TituloSecao-1">Destaques</h2>
   <hr/>
 
   <article class="article-index">
-      <div class="containerr" style="background: #ffffff59;">
+      <div class="containerr" style="background-image: linear-gradient(180deg, #000000bd, #407bff3b, transparent);">
           <% for (let post of postsFav){ %>
-        <div class="cards centraliza" style="height: auto;">
+        <div class="cards centraliza animacao-dard-tempo" style="height: auto;">
           <div class="centraliza">
             <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
           </div>
@@ -234,12 +235,12 @@
 
 
   <% if (postsAll.length > 0){ %>
-      <h2 class="text-dark">Outros Posts</h2>
+      <h2 class="TituloSecao-2">Outros Posts</h2>
       <hr/>
   <article class="article-index">
-    <div class="containerr" style="background: #ebebeb80;">
+    <div class="containerr" style="background-image: linear-gradient(180deg, #646464bd, #407bff3b, transparent);">
         <% for (let post of postsAll){ %>
-      <div class="cards centraliza" style="height: auto;">
+      <div class="cards centraliza animacao-dard-tempo" style="height: auto;">
         <div class="centraliza">
           <img class="d-block" style="width: 90%;" src="../<%=post.card_img_url%>" alt="">
         </div>
@@ -261,7 +262,6 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/pegaInformacoesIndex.js"></script>
 
 <%- include('include/footer.ejs')%>

@@ -58,7 +58,7 @@ io.emit("user_on",online_)
 setInterval(async()=>{
 io.emit("estatisticaBlog",getUpdateEstatistica.estatisticas)
 io.emit("RankPostBlog",getUpdateRankPost.rankPost)
-},60000)
+},1800000)
 
 });
 server.listen(port,host,()=>{
